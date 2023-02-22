@@ -700,6 +700,11 @@
 <!-- Dashboard init -->
 <script src="{{ asset('dashboard/js/pages/dashboard-ecommerce.init.js') }}"></script>
 
+<!-- Alpine JS -->
+<script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
+
+
+
 <!-- App js -->
 <script src="{{ asset('dashboard/js/app.js') }}"></script>
 

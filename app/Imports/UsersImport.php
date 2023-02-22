@@ -27,7 +27,6 @@ class UsersImport implements ToModel
             'firstname' => $row[0],
             'lastname' => $row[1],
             'email' => $emailExists ? $email : $row[2],
-            'phone' => $row[3],
             'password' => Hash::make('password'),
             'slug' => Str::slugger($emailExists ? $email : $row[2])
         ]);

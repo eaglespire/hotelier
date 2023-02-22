@@ -3,9 +3,9 @@
 @section('content')
     <x-container>
         <x-slot:header>
-            @livewire('modules.users.create-user')
+            @livewire('modules.staff.add-staff')
         </x-slot:header>
-        @livewire('modules.users.users-table')
+        @livewire('modules.staff.staff-table')
     </x-container>
 @endsection
 

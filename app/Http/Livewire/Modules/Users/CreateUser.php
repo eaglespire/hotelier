@@ -2,6 +2,7 @@
 
 namespace App\Http\Livewire\Modules\Users;
 
+use App\Exports\UsersExport;
 use App\Imports\UsersImport;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
@@ -44,6 +45,12 @@ class CreateUser extends Component
         Excel::import(new UsersImport, $this->selectedFile->store('files'));
         $this->emit('success','Operation successful');
         $this->emitTo('modules.users.users-table','refreshComponent');
+    }
+
+    public function export()
+    {
+        sleep(1);
+        return Excel::download(new UsersExport,'users.xlsx');
     }
 
     public function store()

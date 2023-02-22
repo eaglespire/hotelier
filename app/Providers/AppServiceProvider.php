@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use App\Mixins\StrMixins;
 use Illuminate\Database\Query\Builder;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Str;
@@ -33,8 +34,9 @@ class AppServiceProvider extends ServiceProvider
             }
             return $this;
         });
-        Str::macro('slugger', function ($string = 'slugger'){
-            return substr(md5($string),1);
-        });
+//        Str::macro('slugger', function ($string = 'slugger'){
+//            return substr(md5($string),1);
+//        });
+        Str::mixin(new StrMixins());
     }
 }

@@ -5,6 +5,7 @@ namespace App\Http\Livewire\Modules\Users;
 use App\Exports\UsersExport;
 use App\Models\User;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 use Livewire\Component;
 use Livewire\WithPagination;
@@ -15,17 +16,13 @@ class UsersTable extends Component
     use WithPagination;
     public $paginationTheme = 'bootstrap';
     public $searchTerm = '';
+    public $headers = ['S/N','User','Email','Date Created','Status','Actions'];
 
     protected $listeners = ['refreshComponent'=>'$refresh'];
 
     public function updatingSearchTerm()
     {
         $this->resetPage();
-    }
-    public function export()
-    {
-        sleep(1);
-        return Excel::download(new UsersExport,'users.xlsx');
     }
 
     public function deleteUser(int $id): \Illuminate\Http\RedirectResponse
@@ -44,12 +41,15 @@ class UsersTable extends Component
     public function render()
     {
         //sleep(1);
-        return view('livewire.modules.users.users-table', [
-            'users' =>
-                User::search(['firstname','lastname','email'], $this->searchTerm)
-                ->latest()
-                ->select('firstname','lastname','email','created_at','id','slug')
-                ->paginate(10)
-        ]);
+        return view('livewire.modules.users.users-table',
+            [
+                'users' => User::search(['firstname','lastname','status','email'], $this->searchTerm)
+                            ->where('id','>',1)
+                            ->latest()
+                            ->select('firstname','lastname','email','status','id','slug','created_at')
+                            ->simplePaginate(10)
+            ]
+        );
+
     }
 }

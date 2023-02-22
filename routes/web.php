@@ -18,10 +18,17 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+
 Route::prefix('usr')->name('usr.')->group(function (){
     Route::controller(DashboardController::class)->group(function (){
         Route::get('home','index')->name('index');
-        Route::get('/users/{user:slug}','editUser')->name('edit-user');
+        Route::get('users/{user:slug}','editUser')->name('edit-user');
         Route::get('users','users')->name('users');
+        Route::get('roles','roles')->name('roles');
+        Route::get('permissions','permissions')->name('permissions');
+        Route::get('roles/{id}','editRole')->name('edit-role');
+        Route::get('staff','allStaff')->name('all-staff');
+        Route::get('staff/{id}','staff')->name('staff');
+        Route::post('staff/update','updateStaff')->name('update-staff');
     });
 });

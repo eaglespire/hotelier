@@ -30,7 +30,10 @@
                                 <a href="apps-calendar.html" class="nav-link" data-key="t-calendar">{{__('Events')}}</a>
                             </li>
                             <li class="nav-item">
-                                <a href="apps-chat.html" class="nav-link" data-key="t-chat">{{__('Roles and Permissions')}}</a>
+                                <a href="{{ route('usr.roles') }}" class="nav-link" data-key="t-chat">{{__('Roles')}}</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="{{ route('usr.permissions') }}" class="nav-link" data-key="t-chat">{{__('Permissions')}}</a>
                             </li>
                             <li class="nav-item">
                                 <a href="#sidebarEmail" class="nav-link" data-bs-toggle="collapse" role="button" aria-expanded="false" aria-controls="sidebarEmail" data-key="t-email">
@@ -344,7 +347,7 @@
                     <div class="collapse menu-dropdown" id="sidebarAuth">
                         <ul class="nav nav-sm flex-column">
                             <li class="nav-item">
-                                <a href="#sidebarSignIn" class="nav-link"  data-key="t-signin">
+                                <a href="{{ route('usr.all-staff') }}" class="nav-link"  data-key="t-signin">
                                     {{__('All Staff')}}
                                 </a>
                             </li>

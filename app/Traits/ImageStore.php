@@ -22,6 +22,7 @@ trait ImageStore
         }
         return null;
     }
+
     /**
      * @throws \Exception
      */

@@ -6,15 +6,21 @@ use Illuminate\View\Component;
 
 class UserActions extends Component
 {
-    public $buttonText;
+    public string $buttonText;
+    public bool $displayImport;
+    public bool $displayExport;
+    public string $modalSize;
     /**
      * Create a new component instance.
      *
      * @return void
      */
-    public function __construct($buttonText = 'Add User')
+    public function __construct($buttonText = 'Add User',$displayExport = true, $displayImport = true, $modalSize ='modal-md')
     {
         $this->buttonText = $buttonText;
+        $this->displayExport = $displayExport;
+        $this->displayImport = $displayImport;
+        $this->modalSize = $modalSize;
     }
 
     /**

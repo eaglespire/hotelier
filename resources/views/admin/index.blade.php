@@ -801,3 +801,16 @@
         </div> <!-- .col-->
     </div> <!-- end row-->
 @endsection
+
+
+@section('scripts')
+    <!-- apexcharts -->
+    <script src="{{ asset('dashboard/libs/apexcharts/apexcharts.min.js') }}"></script>
+    <!-- Vector map-->
+    <script src="{{ asset('dashboard/libs/jsvectormap/js/jsvectormap.min.js') }}"></script>
+    <script src="{{ asset('dashboard/libs/jsvectormap/maps/world-merc.js') }}"></script>
+    <!--Swiper slider js-->
+    <script src="{{ asset('dashboard/libs/swiper/swiper-bundle.min.js') }}"></script>
+    <!-- Dashboard init -->
+    <script src="{{ asset('dashboard/js/pages/dashboard-ecommerce.init.js') }}"></script>
+@endsection

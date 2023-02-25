@@ -15,7 +15,7 @@
 
     <!--Swiper slider css-->
     <link href="{{ asset('dashboard/libs/swiper/swiper-bundle.min.css') }}" rel="stylesheet" type="text/css" />
-
+    @yield('css')
     <!-- Layout config Js -->
     <script src="{{ asset('dashboard/js/layout.js') }}"></script>
     <!-- Bootstrap Css -->
@@ -26,5 +26,6 @@
     <link href="{{ asset('dashboard/css/app.min.css') }}" rel="stylesheet" type="text/css" />
     <!-- custom Css-->
     <link href="{{ asset('dashboard/css/custom.min.css') }}" rel="stylesheet" type="text/css" />
+    @stack('styles')
     @livewireStyles
 </head>

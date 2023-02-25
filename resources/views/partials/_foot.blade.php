@@ -687,19 +687,7 @@
 <script src="{{ asset('dashboard/js/pages/plugins/lord-icon-2.1.0.js') }}"></script>
 <script src="{{ asset('dashboard/js/plugins.js') }}"></script>
 
-<!-- apexcharts -->
-<script src="{{ asset('dashboard/libs/apexcharts/apexcharts.min.js') }}"></script>
-
-<!-- Vector map-->
-<script src="{{ asset('dashboard/libs/jsvectormap/js/jsvectormap.min.js') }}"></script>
-<script src="{{ asset('dashboard/libs/jsvectormap/maps/world-merc.js') }}"></script>
-
-<!--Swiper slider js-->
-<script src="{{ asset('dashboard/libs/swiper/swiper-bundle.min.js') }}"></script>
-
-<!-- Dashboard init -->
-<script src="{{ asset('dashboard/js/pages/dashboard-ecommerce.init.js') }}"></script>
-
+@yield('scripts')
 <!-- Alpine JS -->
 <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
 

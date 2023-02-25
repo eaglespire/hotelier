@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Employee;
+use App\Models\FileManager;
+use App\Models\RoomCategory;
 use App\Models\User;
 use App\Traits\ImageStore;
 use Carbon\Carbon;
@@ -12,6 +14,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 use Bouncer;
 use Illuminate\Support\Str;
+use Illuminate\Validation\Rule;
 
 class DashboardController extends BaseController
 {
@@ -126,5 +129,21 @@ class DashboardController extends BaseController
             toast('Something went wrong','error');
         }
            return redirect(route('usr.all-staff'));
+    }
+    public function OpenFileManager()
+    {
+        $this->data['title'] = 'File Manager';
+        $this->data['titleDesc'] = 'File Manager';
+        $this->data['description'] = 'File Manager';
+        return view('admin.file-manager.index', $this->data);
+    }
+    public function FileManager(string $folder)
+    {
+        $files = FileManager::where('folder',$folder)->get();
+        $this->data['title'] = "$folder";
+        $this->data['titleDesc'] = "$folder";
+        $this->data['description'] = "$folder";
+        $this->data['files'] = $files;
+        return view('admin.file-manager.show', $this->data);
     }
 }

@@ -351,11 +351,6 @@
                                     {{__('All Staff')}}
                                 </a>
                             </li>
-                            <li class="nav-item">
-                                <a href="auth-signup-basic.html" class="nav-link" data-key="t-basic">
-                                    {{__('Add Staff')}}
-                                </a>
-                            </li>
                         </ul>
                     </div>
                 </li>
@@ -369,23 +364,23 @@
                     <div class="collapse menu-dropdown" id="sidebarPages">
                         <ul class="nav nav-sm flex-column">
                             <li class="nav-item">
-                                <a href="pages-starter.html" class="nav-link" data-key="t-starter">
+                                <a href="{{ route('usr.room.all') }}" class="nav-link" data-key="t-starter">
                                     {{__('All Rooms')}}
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a href="pages-team.html" class="nav-link" data-key="t-team">
-                                    {{__('Add Room')}}
+                                <a href="{{ route('usr.room.categories') }}" class="nav-link" data-key="t-team">
+                                    {{__('Categories')}}
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a href="pages-timeline.html" class="nav-link" data-key="t-timeline">
-                                    {{__('Room Types')}}
+                                <a href="{{ route('usr.room.tags') }}" class="nav-link" data-key="t-team">
+                                    {{__('Tags')}}
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a href="pages-faqs.html" class="nav-link" data-key="t-faqs">
-                                    {{__('Add Room Type')}}
+                                <a href="{{ route('usr.room.features') }}" class="nav-link" data-key="t-team">
+                                    {{__('Features')}}
                                 </a>
                             </li>
                         </ul>
@@ -549,8 +544,8 @@
                 </li>
 
                 <li class="nav-item">
-                    <a class="nav-link menu-link" href="widgets.html">
-                        <i class="ri-honour-line"></i> <span data-key="t-widgets">Widgets</span>
+                    <a class="nav-link menu-link" href="{{ route('usr.open-file-manager') }}">
+                        <i class="ri-honour-line"></i> <span data-key="t-widgets">{{__('File Manager')}}</span>
                     </a>
                 </li>
 

@@ -16,6 +16,8 @@
     <!--Swiper slider css-->
     <link href="{{ asset('dashboard/libs/swiper/swiper-bundle.min.css') }}" rel="stylesheet" type="text/css" />
     @yield('css')
+
+
     <!-- Layout config Js -->
     <script src="{{ asset('dashboard/js/layout.js') }}"></script>
     <!-- Bootstrap Css -->

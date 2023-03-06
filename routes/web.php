@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\BookingController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\RoomController;
 use Illuminate\Support\Facades\Route;
@@ -39,6 +40,10 @@ Route::prefix('usr')->name('usr.')->group(function (){
         Route::get('categories/{id}','RoomCategory')->name('category');
         Route::put('category/update','UpdateRoomCategory')->name('category-update');
         Route::get('/','AllRooms')->name('all');
+        Route::get('/create','CreateRoom')->name('create-room');
+        Route::get('{room:slug}','EditRoom')->name('edit-room');
+        Route::put('{id}/update-room','UpdateRoom')->name('update-room');
+        Route::post('store','StoreRoom')->name('store-room');
         Route::get('tags','tags')->name('tags');
         Route::get('tags/{slug}','tag')->name('tag');
         Route::put('tag/update','UpdateTag')->name('tag-update');
@@ -46,5 +51,13 @@ Route::prefix('usr')->name('usr.')->group(function (){
         Route::get('features/{slug}','feature')->name('feature');
         Route::put('feature/update','UpdateFeature')->name('feature-update');
     });
+    Route::controller(BookingController::class)->prefix('booking')->name('booking.')->group(function (){
+        Route::get('/','index')->name('index');
+        Route::get('create','create')->name('create');
+        Route::get('process-payment/{slug}','ProcessPayment')->name('process-payment');
+        Route::get('successful-payment/{reference}','SuccessfulPayment')->name('successful-payment');
+    });
 });
+
+
 

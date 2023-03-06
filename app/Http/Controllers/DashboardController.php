@@ -139,11 +139,10 @@ class DashboardController extends BaseController
     }
     public function FileManager(string $folder)
     {
-        $files = FileManager::where('folder',$folder)->get();
         $this->data['title'] = "$folder";
         $this->data['titleDesc'] = "$folder";
         $this->data['description'] = "$folder";
-        $this->data['files'] = $files;
+        $this->data['folder'] = $folder;
         return view('admin.file-manager.show', $this->data);
     }
 }

@@ -29,6 +29,8 @@ return [
     */
 
     'env' => env('APP_ENV', 'production'),
+    'PK_PUBLIC' => env('PK_PUBLIC'),
+    'PK_SECRET' => env('PK_SECRET'),
 
     /*
     |--------------------------------------------------------------------------

@@ -6,19 +6,12 @@
                 <div class="mb-3">
                     <label for="customername-field" class="form-label">{{__('Select image/images')}}</label>
                     <input wire:model.defer="files" type="file" id="{{ $increments }}"  class="form-control" multiple>
-                    @error('files')
-                        <div class="invalid-feedback">{{ $message }}</div>
+                    @error('files.*')
+                    <div class="text-danger">{{ $message }}</div>
                     @enderror
-                </div>
-                <div class="mb-3">
-                    <label for="customername-field" class="form-label">{{__('Title')}}</label>
-                    <input wire:model.defer="title" type="text" id="customername-field"
-                           class="form-control @error('title') is-invalid @enderror"
-                           placeholder="Enter title"
-                           required>
-                    <small class="text-muted">{{__('Separate each title with a comma')}}</small>
-                    @error('title')
-                    <div class="invalid-feedback">{{ $message }}</div>
+
+                    @error('files')
+                    <div class="text-danger">{{ $message }}</div>
                     @enderror
                 </div>
                 <div class="mb-3">

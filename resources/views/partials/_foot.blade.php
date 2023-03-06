@@ -689,8 +689,7 @@
 
 @yield('scripts')
 <!-- Alpine JS -->
-<script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
-
+<script src="{{ asset('dashboard/js/alpine-3.1.1.min.js') }}"></script>
 
 
 <!-- App js -->

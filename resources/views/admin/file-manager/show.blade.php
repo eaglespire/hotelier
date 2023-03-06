@@ -4,18 +4,7 @@
     <div class="card-body">
         <div class="row">
             <div class="col-lg-12">
-                <div class="row gallery-wrapper" style="position: relative; height: 1015.47px;">
-                    @if(sizeof($files) !== 0)
-                        @foreach($files as $file)
-                           <x-gallery-card :src="$file->src" :title="$file->title" />
-                        @endforeach
-                    @else
-                        <div class="card card-body">
-                            <p class="card-text">{{ __('Folder is empty')  }}</p>
-                        </div>
-                    @endif
-                </div>
-                <!-- end row -->
+                @livewire('modules.files.folder', ['folder' => $folder] )
             </div>
         </div>
         <!-- end row -->

@@ -10,4 +10,5 @@ class CacheConstants
     public const TagsCache = 'tags-cache';
     public const FeaturesCache = 'features-cache';
     public const FileManagerCache = 'file-manager-cache';
+    public const RoomCache = 'room-cache';
 }

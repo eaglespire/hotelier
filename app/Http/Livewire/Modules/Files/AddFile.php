@@ -4,6 +4,7 @@ namespace App\Http\Livewire\Modules\Files;
 
 use App\Models\FileManager;
 use CloudinaryLabs\CloudinaryLaravel\Facades\Cloudinary;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Str;
 use Livewire\Component;
 use Livewire\WithFileUploads;
@@ -14,16 +15,16 @@ class AddFile extends Component
     public $export = false;
     public $import = false;
     public $files = [];
-    public $title;
     public $folder;
     public $mode;
     public $width;
     public $height;
     public $increments;
+    public $file;
 
     protected $rules = [
+        //'files' => ['required','image','max:1024'],
         'files.*' => ['required','image','max:1024'],
-        'title' => ['required','string'],
         'folder' => ['required'],
         'width' => ['nullable','numeric','min:10'],
         'height' => ['nullable','numeric','min:10'],
@@ -35,40 +36,53 @@ class AddFile extends Component
             'width' => null,
             'height' => null,
             'folder' => 'posts',
-            'title' => null,
             'mode' => 'fit',
             'increments' => 1
         ]);
     }
 
+    private function getFileName($file): string
+    {
+        $string = $file->getClientOriginalName();
+        $exploded = explode('.',$string);
+        return reset($exploded);
+    }
+
     public function SaveFile()
     {
-        $this->validate();
-        //replace multiple white spaces in the received string with a single white space
-        $output = preg_replace('!\s+!', ' ', $this->title);
-        $titles = explode(',',$output);
+        try {
+            $this->validate();
+            //replace multiple white spaces in the received string with a single white space
+            // $output = preg_replace('!\s+!', ' ', $this->title);
+            //$titles = explode(',',$output);
 
-        $photos = $this->UploadFiles();
-        for ($i=0;$i<count($photos); $i++){
-            FileManager::create([
-                'src' => $photos[$i],
-                'title' => $titles[$i] ?? 'Photo',
-                'folder' => $this->folder,
-                'slug' => Str::slug(Str::random())
-            ]);
+            $arr = $this->UploadFiles();
+            for ($i=0;$i<count($arr[0]); $i++){
+                FileManager::create([
+                    'src' => $arr[0][$i],
+                    'title' => $arr[1][$i],
+                    'folder' => $this->folder,
+                    'slug' => Str::slug(Str::random())
+                ]);
+            }
+            $this->increments++;
+            $this->reset(['folder','mode','width','height']);
+            $this->emitSelf('success','Upload successful');
+        } catch (\Exception $exception){
+            Log::error($exception->getMessage());
+            $this->emit('error','Please check your internet');
         }
-        $this->increments++;
-        $this->reset(['folder','title','mode','width','height']);
-        $this->emitSelf('success','Upload successful');
+        return redirect(request()->header('referer'));
     }
 
     private function UploadFiles(): array
     {
         $paths = [];
+        $filenames = [];
         foreach ($this->files as $file){
             if (!empty($this->width) && !empty($this->height)){
                 $path = Cloudinary::upload($file->getRealPath(), [
-                    'folder'=>'site',
+                    'folder'=> config('app.name'),
                     'transformation'=>[
                         'crop' => $this->mode,
                         'width' => $this->width,
@@ -78,7 +92,7 @@ class AddFile extends Component
             }
             elseif (!empty($this->width)){
                 $path = Cloudinary::upload($file->getRealPath(), [
-                    'folder'=>'site',
+                    'folder'=>config('app.name'),
                     'transformation'=>[
                         'crop' => $this->mode,
                         'width' => $this->width,
@@ -87,7 +101,7 @@ class AddFile extends Component
             }
             elseif (!empty($this->height)){
                 $path = Cloudinary::upload($file->getRealPath(), [
-                    'folder'=>'site',
+                    'folder'=> config('app.name'),
                     'transformation'=>[
                         'crop' => $this->mode,
                         'height' => $this->height,
@@ -96,15 +110,16 @@ class AddFile extends Component
             }
             else{
                 $path = Cloudinary::upload($file->getRealPath(), [
-                    'folder'=>'site',
+                    'folder'=> config('app.name'),
                     'transformation'=>[
                         'crop' => $this->mode,
                     ]
                 ])->getSecurePath();
             }
             $paths[] = $path;
+            $filenames[] = $this->getFileName($file);
         }
-        return $paths;
+        return [$paths, $filenames];
     }
 
     public function render()

@@ -23,6 +23,8 @@ class AddBooking extends Component
     public $type;
     public $rooms;
     public $room;
+    public $guestTitle;
+    public $gender;
 
     protected $rules = [
         'firstname' => ['required','string','max:255'],
@@ -53,22 +55,34 @@ class AddBooking extends Component
             'nights' => null,
             'categories' => $categories,
             'type' => $categories[0]['id'],
+            'gender' => 'male',
+            'guestTitle' => 'Mr'
         ]);
-        $rooms = Cache::remember('c-rooms-cache', now()->addDays(30), function (){
-            return Room::where('room_category_id',$this->type)->get();
+        $rooms = Cache::remember(CacheConstants::FilteredRoomCache, now()->addDays(30), function (){
+            return Room::where('room_category_id',$this->type)
+                ->where('is_available',true)
+                ->get();
         });
         $this->rooms = $rooms;
-        $this->room = $this->rooms[0]['id'];
+        if (sizeof($this->rooms) !== 0){
+            $this->room = $this->rooms[0]['id'];
+        }else{
+            $this->room = null;
+        }
+        //$this->room = $this->rooms ? $this->rooms[0]['id'] : null;
     }
 
     public function updatedType()
     {
-        $this->rooms = Room::where('room_category_id',$this->type)->get();
+        $this->rooms = Room::where('room_category_id',$this->type)
+            ->where('is_available',true)
+            ->get();
     }
 
     public function SaveInformation()
     {
         $this->validate();
+
         //fetch the room
         $room = Room::where('id',$this->room)->first();
         $data = [
@@ -86,7 +100,9 @@ class AddBooking extends Component
             'src' => $room->first_image,
             'number' => $room->room_number,
             'title' => $room->title,
-            'price' => $room->price
+            'price' => $room->price,
+            'guestTitle' => $this->guestTitle,
+            'gender' => $this->gender
         ];
         //save the data in session
         session()->put('booking',$data);

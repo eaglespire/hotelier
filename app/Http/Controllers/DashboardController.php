@@ -145,4 +145,11 @@ class DashboardController extends BaseController
         $this->data['folder'] = $folder;
         return view('admin.file-manager.show', $this->data);
     }
+    public function log()
+    {
+        $this->data['title'] = 'User Activities';
+        $this->data['titleDesc'] = 'User Activities';
+        $this->data['description'] = 'User Activities';
+        return view('admin.log.index', $this->data);
+    }
 }

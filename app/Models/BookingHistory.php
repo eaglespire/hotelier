@@ -10,6 +10,21 @@ class BookingHistory extends Model
     use HasFactory;
     protected $table = 'booking_histories';
     protected $fillable = [
-        'guest_id','mode','nights','arrival','room_category_id','room_id'
+        'uuid','mode','nights','arrival','room_category_id','room_id',
+        'firstname','lastname','email','phone','address','title','gender','departure',
     ];
+
+    protected $casts = [
+        'arrival' => 'date',
+        'departure' => 'date'
+    ];
+
+    public function room_category()
+    {
+        return $this->belongsTo(RoomCategory::class);
+    }
+    public function room()
+    {
+        return $this->belongsTo(Room::class);
+    }
 }

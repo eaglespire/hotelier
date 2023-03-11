@@ -1,8 +1,8 @@
 @extends('master')
 
 @section('content')
-    <div class="card card-header d-flex">
-        <a href="{{ route('usr.room.all') }}" class="btn btn-primary align-self-end">{{__('All Rooms')}}</a>
+    <div class="d-flex justify-content-end">
+        <a href="{{ route('usr.room.all') }}" class="btn btn-primary  mb-2">{{__('All Rooms')}}</a>
     </div>
     <form action="{{ route('usr.room.store-room') }}" method="post" id="createproduct-form" autocomplete="off" class="needs-validation">
         @csrf

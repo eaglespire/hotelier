@@ -2,14 +2,22 @@
 
 namespace App\Providers;
 
+use App\Models\Booking;
+use App\Models\BookingHistory;
 use App\Models\Employee;
 use App\Models\Feature;
 use App\Models\FileManager;
+use App\Models\Guest;
+use App\Models\Room;
 use App\Models\RoomCategory;
 use App\Models\Tag;
 use App\Models\User;
+use App\Observers\BookingHistoryObserver;
+use App\Observers\BookingObserver;
 use App\Observers\FeatureObserver;
 use App\Observers\FileManagerObserver;
+use App\Observers\FilteredRoomObserver;
+use App\Observers\GuestObserver;
 use App\Observers\RoomCategoriesObserver;
 use App\Observers\StaffObserver;
 use App\Observers\TagObserver;
@@ -45,6 +53,10 @@ class EventServiceProvider extends ServiceProvider
         Tag::observe(TagObserver::class);
         Feature::observe(FeatureObserver::class);
         FileManager::observe(FileManagerObserver::class);
+        Guest::observe(GuestObserver::class);
+        Room::observe(FilteredRoomObserver::class);
+        Booking::observe(BookingObserver::class);
+        BookingHistory::observe(BookingHistoryObserver::class);
     }
 
     /**

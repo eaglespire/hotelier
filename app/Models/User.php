@@ -25,6 +25,9 @@ class User extends Authenticatable
         'password',
         'slug',
         'status',
+        'staff_id',
+        'otp',
+        'verified',
     ];
 
     /**

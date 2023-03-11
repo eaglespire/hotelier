@@ -35,6 +35,9 @@
                             <li class="nav-item">
                                 <a href="{{ route('usr.permissions') }}" class="nav-link" data-key="t-chat">{{__('Permissions')}}</a>
                             </li>
+                            <li class="nav-item">
+                                <a href="{{ route('usr.log') }}" class="nav-link" data-key="t-chat">{{__('Logs')}}</a>
+                            </li>
                         </ul>
                     </div>
                 </li>
@@ -133,13 +136,13 @@
                                 <a href="{{ route('usr.booking.create') }}" class="nav-link" data-key="t-sweet-alerts">{{__('Add New')}}</a>
                             </li>
                             <li class="nav-item">
-                                <a href="" class="nav-link" data-key="t-sweet-alerts">{{__('All Bookings')}}</a>
+                                <a href="{{ route('usr.booking.index') }}" class="nav-link" data-key="t-sweet-alerts">{{__('All Bookings')}}</a>
                             </li>
                             <li class="nav-item">
-                                <a href="" class="nav-link" data-key="t-sweet-alerts">{{__('Online Bookings')}}</a>
+                                <a href="{{ route('usr.booking.booking-records') }}" class="nav-link" data-key="t-sweet-alerts">{{__('Records')}}</a>
                             </li>
                             <li class="nav-item">
-                                <a href="" class="nav-link" data-key="t-nestable-list">{{__('Offline Bookings')}}</a>
+                                <a href="{{ route('usr.booking.guests') }}" class="nav-link" data-key="t-nestable-list">{{__('Guests')}}</a>
                             </li>
                         </ul>
                     </div>

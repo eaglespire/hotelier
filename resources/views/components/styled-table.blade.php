@@ -1,8 +1,10 @@
 
-<div class="card-body border-bottom-dashed border-bottom">
+
+
+<div class="card-body border-bottom-dashed border-bottom my-2">
     <form>
         <div class="row g-3">
-            <div class="col-xl-6">
+            <div class="col-7">
                 <div class="search-box">
                     <input type="text" class="form-control search"  {{ $attributes->wire('model') }}
                            placeholder="{{ $searchPlaceHolder }}">
@@ -10,19 +12,26 @@
                 </div>
             </div>
             <!--end col-->
-            <div class="col-xl-6 order-first">
-                <div>
-                    <h5 class="card-title mb-0">{{ $title }}</h5>
+            <div class="col-5">
+                <div class="d-flex justify-content-end">
+                    <a href="{{ route($route) }}" class="btn btn-outline-info me-1">
+                        {{ $btn }}
+                    </a>
+                    <a href="{{ url()->previous() }}" class="btn btn-primary">
+                        Back
+                    </a>
                 </div>
+
             </div>
         </div>
         <!--end row-->
     </form>
 </div>
 
-<div class="card-body">
+<div class="card card-body">
     <div class="table-responsive table-card mb-1">
-        <table class="table align-middle" id="customerTable">
+        <table class="table align-middle caption-top " id="customerTable">
+            <caption class="ps-1">{{ $title }}</caption>
             @if(sizeof($headers) !== 0)
                 <thead class="table-light text-muted">
                 <tr>

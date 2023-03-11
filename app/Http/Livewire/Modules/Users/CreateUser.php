@@ -61,7 +61,7 @@ class CreateUser extends Component
             'lastname' => $this->lastname,
             'email' => $this->email,
             'password' => Hash::make('password'),
-            'slug' => Str::slugger($this->email)
+            'slug' => Str::slugger($this->email),
         ]);
         if ($user){
             $this->emitTo('modules.users.users-table','refreshComponent');

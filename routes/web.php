@@ -2,7 +2,11 @@
 
 use App\Http\Controllers\BookingController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\MailController;
+use App\Http\Controllers\ProfileInformationController;
 use App\Http\Controllers\RoomController;
+use App\Http\Controllers\VerificationController;
+use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -17,11 +21,19 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
+    //$date1 = Carbon::createFromFormat('Y-m-d H:i:s', auth()->user()->created_at->addMinutes(60));
+    //$date2 = Carbon::createFromFormat('Y-m-d H:i:s', Carbon::now()->addMinutes(3));
+    //$result = $date1->gt($date2);
+
     return view('welcome');
 });
+Route::get('test-email', function (){
+    return view('admin.emails.test');
+});
+Route::post('test-email', [MailController::class,'ComposeTestEmail'])->name('compose-email');
 
 
-Route::prefix('usr')->name('usr.')->group(function (){
+Route::prefix('usr')->name('usr.')->middleware(['not-a-visitor'])->group(function (){
     Route::controller(DashboardController::class)->group(function (){
         Route::get('home','index')->name('index');
         Route::get('users/{user:slug}','editUser')->name('edit-user');
@@ -34,6 +46,7 @@ Route::prefix('usr')->name('usr.')->group(function (){
         Route::post('staff/update','updateStaff')->name('update-staff');
         Route::get('file-manager','OpenFileManager')->name('open-file-manager');
         Route::get('file-manager/{folder}','FileManager')->name('file-manager');
+        Route::get('log','log')->name('log');
     });
     Route::controller(RoomController::class)->prefix('rooms')->name('room.')->group(function (){
         Route::get('categories','RoomCategories')->name('categories');
@@ -56,8 +69,29 @@ Route::prefix('usr')->name('usr.')->group(function (){
         Route::get('create','create')->name('create');
         Route::get('process-payment/{slug}','ProcessPayment')->name('process-payment');
         Route::get('successful-payment/{reference}','SuccessfulPayment')->name('successful-payment');
+        Route::get('get-bookings','GetBookings')->name('get-bookings');
+        Route::get('records','BookingRecords')->name('booking-records');
+        Route::get('record/{phone}','BookingRecord')->name('booking-record');
+    });
+    Route::get('guests', [BookingController::class,'guests'])->name('booking.guests');
+    Route::controller(ProfileInformationController::class)->prefix('profile')->name('profile.')->group(function (){
+        Route::get('/','index')->name('index');
     });
 });
 
 
+Route::view('jobs', 'front.career', ['title'=>'Career','titleDesc'=> 'Career','description'=>'Career'])->name('jobs');
+
+Route::middleware(['a-visitor'])->group(function (){
+    Route::view('career','front.build-career',['title'=>'Career','titleDesc'=> 'Career','description'=>'Career'] )->name('career');
+});
+
+Route::controller(VerificationController::class)->prefix('auth/verify')->name('auth.')->group(function (){
+    Route::get('/','show')->name('verify');
+    Route::post('/', 'SubmitOTP')->name('submit');
+    Route::post('resend', 'ResendOTP')->name('resend');
+});
+
+
+Auth::routes();
 

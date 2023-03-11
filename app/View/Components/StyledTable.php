@@ -10,17 +10,21 @@ class StyledTable extends Component
     public $collection;
     public $searchPlaceHolder;
     public $title;
+    public $route;
+    public $btn;
     /**
      * Create a new component instance.
      *
      * @return void
      */
-    public function __construct($headers = [], $collection = null, $searchPlaceHolder = 'Search...', $title = 'Users')
+    public function __construct($headers = [], $collection = null, $searchPlaceHolder = 'Search...', $title = 'Users',$route='usr.index', $btn = 'Home')
     {
         $this->headers = $headers;
         $this->collection = $collection;
         $this->searchPlaceHolder = $searchPlaceHolder;
         $this->title = $title;
+        $this->route = $route;
+        $this->btn = $btn;
     }
 
     /**

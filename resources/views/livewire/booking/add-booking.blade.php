@@ -73,7 +73,7 @@
                                     <div class="mb-3">
                                         <label>{{__('Room Type')}}</label>
                                         <select wire:model="type" class="form-control @error('type') is-invalid @enderror">
-                                            <option disabled>{{__('Please choose')}}</option>
+                                            <option>{{__('Please choose')}}</option>
                                             @foreach($categories as $category)
                                                 <option value="{{ $category->id }}">{{ $category->name }}</option>
                                             @endforeach
@@ -87,17 +87,22 @@
                             <div class="col-12">
                                 <div class="mb-3">
                                     <label>{{__('Room')}}</label>
-                                    @if(isset($rooms))
+                                    @if(sizeof($rooms) !== 0)
                                         <select wire:model.defer="room" class="form-control @error('room') is-invalid @enderror">
-                                            <option disabled>{{__('Please choose')}}</option>
+                                            <option >{{__('Please choose')}}</option>
                                             @foreach($rooms as $room)
                                                 <option value="{{ $room->id }}">{{ $room->title }}</option>
                                             @endforeach
                                         </select>
-                                        @error('room')
-                                            <span class="invalid-feedback">{{ $message }}</span>
-                                        @enderror
+                                    @else
+                                        <p class="text-muted">No available rooms for this category
+                                            <a href="{{ route('usr.room.create-room') }}">Add New Room</a>
+                                        </p>
+
                                     @endif
+                                    @error('room')
+                                        <span class="text-danger">{{ $message }}</span>
+                                    @enderror
                                 </div>
                             </div>
                         </div>
@@ -135,6 +140,28 @@
                                 <span class="invalid-feedback">{{ $message }}</span>
                             @enderror
                         </div>
+                        <div class="mb-3">
+                            <label for="choices-publish-status-input" class="form-label">{{__('Gender')}}</label>
+
+                            <select wire:model.defer="gender" class="form-select" id="choices-publish-status-input" name="gender">
+                                <option disabled>{{__('Please select')}}</option>
+                                <option value="male">Male</option>
+                                <option value="female">Female</option>
+                                <option value="others">Others</option>
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label for="choices-publish-status-input" class="form-label">{{__('Title')}}</label>
+
+                            <select wire:model.defer="guestTitle" class="form-select" id="choices-publish-status-input" name="title">
+                                <option disabled>{{__('Please select')}}</option>
+                                <option value="Mr">Mr.</option>
+                                <option value="Mrs">Mrs.</option>
+                                <option value="Doc">Doc.</option>
+                                <option value="Engr">Engr.</option>
+                                <option value="Others">Others</option>
+                            </select>
+                        </div>
                     </div>
                     <!-- end card body -->
                 </div>
@@ -148,3 +175,17 @@
         </div>
     </form>
 </div>
+
+@push('scripts')
+    <script>
+        window.addEventListener('livewire:load', function () {
+            @this.on('cannot-proceed', () => {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Cannot Proceed',
+                    text: 'Seems room information is not set'
+                })
+            })
+        })
+    </script>
+@endpush

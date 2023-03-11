@@ -19,6 +19,8 @@ return new class extends Migration
             $table->enum('mode',['online','offline'])->nullable();
             $table->integer('nights')->nullable();
             $table->date('arrival')->nullable();
+            $table->date('departure')->nullable();
+            $table->boolean('payment_done')->default(false);
             $table->foreignId('room_category_id')->constrained()->onUpdate('CASCADE')->onDelete('CASCADE');
             $table->foreignId('room_id')->constrained()->onUpdate('CASCADE')->onDelete('CASCADE');
             $table->timestamps();

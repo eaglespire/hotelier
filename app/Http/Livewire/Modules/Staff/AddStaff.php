@@ -52,7 +52,8 @@ class AddStaff extends Component
         ]);
         //update the user's status
         $staff->user->update([
-            'status'=> true
+            'status'=> true,
+            'staff_id' => $staff->staff_number
         ]);
         //first assign a role to the user
         Bouncer::assign($this->role)->to($staff->user);

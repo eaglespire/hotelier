@@ -8,5 +8,5 @@ use Illuminate\Database\Eloquent\Model;
 class Guest extends Model
 {
     use HasFactory;
-    protected $fillable = ['firstname','lastname','email','address','phone'];
+    protected $fillable = ['firstname','lastname','email','address','phone','title','gender'];
 }

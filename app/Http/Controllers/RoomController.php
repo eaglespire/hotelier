@@ -73,7 +73,7 @@ class RoomController extends BaseController
         $tags = Cache::remember(CacheConstants::TagsCache, now()->addDays(30), function (){
             return Tag::get();
         });
-        $images = Cache::remember('cached-room-images', now()->addDays(30), function (){
+        $images = Cache::remember(CacheConstants::CachedRoomImages, now()->addDays(30), function (){
             return FileManager::where('folder','rooms')->get();
         });
         $this->data['title'] = 'Create Room';
@@ -131,7 +131,7 @@ class RoomController extends BaseController
         $tags = Cache::remember(CacheConstants::TagsCache, now()->addDays(30), function (){
             return Tag::get();
         });
-        $images = Cache::remember('cached-room-images', now()->addDays(30), function (){
+        $images = Cache::remember(CacheConstants::CachedRoomImages, now()->addDays(30), function (){
             return FileManager::where('folder','rooms')->get();
         });
         $this->data['title'] = 'Edit '. $room->title;

@@ -180,7 +180,7 @@ return [
 
         /*
         |--------------------------------------------------------------------------
-        | PDF Extension
+        | PDFLoader Extension
         |--------------------------------------------------------------------------
         |
         | Configure here which Pdf driver should be used by default.

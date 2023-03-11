@@ -15,7 +15,14 @@ return new class extends Migration
     {
         Schema::create('booking_histories', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('guest_id')->constrained()->onUpdate('CASCADE')->onDelete('CASCADE');
+            $table->string('firstname')->nullable();
+            $table->string('lastname')->nullable();
+            $table->string('email')->nullable();
+            $table->string('phone')->nullable();
+            $table->string('address')->nullable();
+            $table->string('title')->nullable();
+            $table->string('gender')->nullable();
+            $table->integer('uuid');
             $table->enum('mode',['online','offline'])->nullable();
             $table->integer('nights')->nullable();
             $table->date('arrival')->nullable();

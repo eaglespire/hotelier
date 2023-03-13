@@ -88,7 +88,7 @@ class RegisterController extends BaseController
         $message.="<h1>".$user['otp']."</h1>";
         $message.="<br/>";
         $message.="The code will expire in 60 minutes.";
-        send_email_otp($data['email'],'Please Confirm Your Email Address',$message);
+        send_email_message($data['email'],'Please Confirm Your Email Address',$message);
         log_activity('A new user has registered into the platform',$user->id);
         return $user;
     }

@@ -156,13 +156,14 @@
 
                 <li class="nav-item">
                     <a class="nav-link menu-link" href="#sidebarForms" data-bs-toggle="collapse" role="button" aria-expanded="false" aria-controls="sidebarForms">
-                        <i class="ri-file-list-3-line"></i> <span data-key="t-forms">Forms</span>
+                        <i class="ri-file-list-3-line"></i> <span data-key="t-forms">{{__('Settings')}}</span>
                     </a>
                     <div class="collapse menu-dropdown" id="sidebarForms">
                         <ul class="nav nav-sm flex-column">
                             <li class="nav-item">
-                                <a href="forms-elements.html" class="nav-link" data-key="t-basic-elements">Basic
-                                    Elements</a>
+                                <a href="{{ route('usr.settings.footer') }}" class="nav-link" data-key="t-basic-elements">
+                                    {{__('Footer Settings')}}
+                                </a>
                             </li>
                             <li class="nav-item">
                                 <a href="forms-select.html" class="nav-link" data-key="t-form-select"> Form Select </a>

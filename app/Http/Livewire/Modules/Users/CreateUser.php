@@ -62,7 +62,24 @@ class CreateUser extends Component
             'email' => $this->email,
             'password' => Hash::make('password'),
             'slug' => Str::slugger($this->email),
+            'verified' => true
         ]);
+        //send a mail to that user with his/her account details and a welcome mail
+        $subject = "Your New ". config('app.name') . " user account is ready";
+        $message = "<h1>"."Your new " . config('app.name') . " user account is set" . "</h1>";
+        $message.="<br/>";
+        $message.="Hello ". $user->fullname . ", welcome to ". config('app.name');
+        $message.= "<br/>";
+        $message.="<p>Your login details are given below</p>";
+        $message.= "<br/>";
+        $message.="Email : ". $user->email;
+        $message.= "<br/>";
+        $message.="Password : password";
+        $message.= "<br/>";
+        $message.="<a href='/career' style='background-color: #405189; color: #ffffff; padding: 1rem; border-radius: 10px; border: none;display: block; margin-top: 1rem;'>Access Your Dashboard</a>";
+
+        //dd($user->email,$subject,$message);
+        $response = send_email_message($user->email,$subject,$message);
         if ($user){
             $this->emitTo('modules.users.users-table','refreshComponent');
             $this->emitSelf('success', 'New User Added Successfully');

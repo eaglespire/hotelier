@@ -56,13 +56,17 @@
                                     </div>
                                     <!--end col-->
 
+                                    @php
+                                        $sexes = ['male','female','others'];
+                                    @endphp
                                     <div class="col-lg-6">
                                         <label for="experienceYear" class="form-label">{{__('Gender')}}</label>
-                                        <select class="form-control" data-choices="" data-choices-search-false="" name="gender">
-                                            <option disabled>{{ __('Select gender') }}</option>
-                                            <option value="male">{{__('Male')}}</option>
-                                            <option value="female">{{__('Female')}}</option>
-                                            <option value="others">{{__('Others')}}</option>
+                                        <select class="form-control"  name="gender">
+                                            @for($i = 0; $i < count($sexes); $i++)
+                                                <option @if($staff->gender == $sexes[$i]) selected @endif value="{{ $sexes[$i] }}">
+                                                    {{ ucfirst($sexes[$i]) }}
+                                                </option>
+                                            @endfor
                                         </select>
                                     </div>
                                     <!--end col-->
@@ -153,9 +157,9 @@
                             @enderror
                         </div>
                         <!--end col-->
-                        <div class="hstack gap-2 justify-content-end">
-                            <a class="btn btn-success" href="javascript:deleteEl(1)">Delete</a>
-                        </div>
+{{--                        <div class="hstack gap-2 justify-content-end">--}}
+{{--                            <a class="btn btn-success" href="javascript:deleteEl(1)">Delete</a>--}}
+{{--                        </div>--}}
                     </div>
                     <!--end row-->
                 </div>
@@ -167,7 +171,6 @@
             <div class="col-lg-12">
                 <div class="hstack gap-2">
                     <button type="submit" class="btn btn-success">Update</button>
-                    <a href="javascript:new_link()" class="btn btn-primary">Add New</a>
                 </div>
             </div>
             <!--end col-->

@@ -5,6 +5,7 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\MailController;
 use App\Http\Controllers\ProfileInformationController;
 use App\Http\Controllers\RoomController;
+use App\Http\Controllers\SettingsController;
 use App\Http\Controllers\VerificationController;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Route;
@@ -20,13 +21,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    //$date1 = Carbon::createFromFormat('Y-m-d H:i:s', auth()->user()->created_at->addMinutes(60));
-    //$date2 = Carbon::createFromFormat('Y-m-d H:i:s', Carbon::now()->addMinutes(3));
-    //$result = $date1->gt($date2);
 
-    return view('welcome');
-});
 Route::get('test-email', function (){
     return view('admin.emails.test');
 });
@@ -77,10 +72,18 @@ Route::prefix('usr')->name('usr.')->middleware(['not-a-visitor'])->group(functio
     Route::controller(ProfileInformationController::class)->prefix('profile')->name('profile.')->group(function (){
         Route::get('/','index')->name('index');
     });
+    Route::controller(SettingsController::class)->prefix('settings')->name('settings.')->group(function (){
+        Route::get('footer','FooterSettings')->name('footer');
+        Route::post('footer','SaveToFooter')->name('save-to-footer');
+        Route::get('footer/{id}','EditFooter')->name('edit-footer');
+        Route::post('footer-title','SaveToFooterTitle')->name('save-to-footer-title');
+        Route::delete('footer/{id}','DeleteFooter')->name('delete-footer');
+    });
 });
 
 
 Route::view('jobs', 'front.career', ['title'=>'Career','titleDesc'=> 'Career','description'=>'Career'])->name('jobs');
+Route::view('/', 'front.index', ['title'=>'Career','titleDesc'=> 'Career','description'=>'Career'])->name('jobs');
 
 Route::middleware(['a-visitor'])->group(function (){
     Route::view('career','front.build-career',['title'=>'Career','titleDesc'=> 'Career','description'=>'Career'] )->name('career');

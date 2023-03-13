@@ -2,6 +2,7 @@
 
 @section('content')
     <div class="row">
+        {{ auth()->user() }}
         <div class="col-xl-3 col-md-6">
             <!-- card -->
             <div class="card card-animate">

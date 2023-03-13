@@ -14,5 +14,8 @@
         "sass": "^1.32.11",
         "sass-loader": "^11.0.1",
         "vite": "^4.0.0"
+    },
+    "dependencies": {
+        "ckeditor5-custom-build": "file:public/dashboard/ckeditor"
     }
 }

@@ -61,7 +61,7 @@ class VerificationController extends BaseController
         $message.="<h1>".$code."</h1>";
         $message.="<br/>";
         $message.="The code will expire in 15 minutes.";
-        send_email_otp(auth()->user()->email,'Please Confirm Your Email Address',$message);
+        send_email_message(auth()->user()->email,'Please Confirm Your Email Address',$message);
         //update the db
         auth()->user()->update(['otp'=> $code]);
         toast('An otp code has been resent to your registered email','success');

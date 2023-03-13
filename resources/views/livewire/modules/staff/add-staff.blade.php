@@ -23,8 +23,7 @@
                 </div>
                 <div class="mb-3">
                     <label for="customername-field" class="form-label">{{__('Choose gender')}}</label>
-                    <select class="form-select mb-3 @error('gender') is-invalid @enderror" aria-label="select gender">
-                        <option disabled>{{__('Please choose')}}</option>
+                    <select wire:model.defer="gender" class="form-select mb-3 @error('gender') is-invalid @enderror" aria-label="select gender">
                         <option value="male">{{__('Male')}}</option>
                         <option value="female">{{__('Female')}}</option>
                         <option value="others">{{__('Others')}}</option>

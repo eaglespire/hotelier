@@ -21,7 +21,7 @@ class AddStaff extends Component
     protected $rules = [
         'age' => ['required','numeric'],
         'user_id' => ['required','numeric','unique:employees'],
-        'gender' => ['required'],
+        //'gender' => ['required'],
         'role' => ['required'],
         'doe' => ['required']
     ];
@@ -57,7 +57,7 @@ class AddStaff extends Component
         ]);
         //first assign a role to the user
         Bouncer::assign($this->role)->to($staff->user);
-        $this->reset(['age','user_id','gender','role','doe']);
+        $this->reset(['age','user_id','role','doe']);
         $this->emit('success','Staff added successfully');
         $this->emitTo('modules.staff.staff-table','refreshComponent');
     }

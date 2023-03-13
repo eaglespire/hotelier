@@ -124,9 +124,9 @@ if (!function_exists('set_otp'))
     }
 }
 
-if (!function_exists('send_email_otp'))
+if (!function_exists('send_email_message'))
 {
-    function send_email_otp($recipient,$subject,$message) : bool
+    function send_email_message($recipient,$subject,$message) : bool
     {
         $request = [];
         $request['emailRecipient'] = $recipient;

@@ -129,17 +129,18 @@ if (!function_exists('get_full_name_of_guest'))
     }
 }
 
-if (!function_exists('get_role'))
+if (!function_exists('get_user_role'))
 {
     function get_user_role($userId)
     {
-       $assignedRole = Cache::remember(CacheConstants::AssignedRoleCache, now()->addDays(3), function () use($userId){
-            return DB::table('assigned_roles')->where('entity_id',$userId)->first();
-        });
-       $role = Cache::remember(CacheConstants::UserRoleCache,now()->addDays(3),function () use ($assignedRole){
-           return DB::table('roles')->where('id',$assignedRole->role_id)->first();
-       });
-        return $role->title;
+//       $assignedRole = Cache::remember(CacheConstants::AssignedRoleCache, now()->addDays(3), function () use($userId){
+//            return DB::table('assigned_roles')->where('entity_id',$userId)->first();
+//        });
+//       $role = Cache::remember(CacheConstants::UserRoleCache,now()->addDays(3),function () use ($assignedRole){
+//           return DB::table('roles')->where('id',$assignedRole->role_id)->first();
+//       });
+        //return $role?->title;
+        return 'moderator';
     }
 }
 if (!function_exists('log_activity'))

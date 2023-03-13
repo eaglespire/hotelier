@@ -23,8 +23,8 @@
                 </div>
                 <label class="form-label" for="password-input">Password</label>
                 <div class="position-relative auth-pass-inputgroup mb-3">
-                    <input name="password" type="password" class="form-control pe-5 @error('password') is-invalid @enderror" placeholder="Enter password"
-                           id="password-input">
+                    <input name="password" type="password" class="form-control pe-5 password-input @error('password') is-invalid @enderror"
+                           placeholder="Enter password" id="password-input">
                     @error('password')
                         <span class="invalid-feedback">{{ $message }}</span>
                     @enderror

@@ -115,7 +115,8 @@ class DashboardController extends BaseController
                 'zip' => $request['zip'],
                 'age' => $request['age'],
                 'doe' => $request['doe'] !== null ? Carbon::parse($request['doe']) : $staff->doe,
-                'photo' => $src
+                'photo' => $src,
+                'gender' => $request['gender']
             ]);
             $staff->update([
                 'staff_number' => Str::staff($request['age'],$staff->doe,$request['role'])
